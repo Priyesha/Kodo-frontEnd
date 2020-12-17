@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { GridData } from '../model/grid-data';
 
 @Component({
   selector: 'app-card',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  @Input() cardData: GridData;
   constructor() { }
 
   ngOnInit(): void {
