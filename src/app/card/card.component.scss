@@ -3,9 +3,15 @@
     height: 450px;
     border: 1px solid #000000;
     margin-bottom: 20px;
-    padding: 0 10px 0 10px ;
+    // margin-left: 12px;
+    // @media (min-width: 1024px) {
+    //   margin-left: 0px;
+    // }
 }
 .image {
     width: 333px;
     height: 200px;
+}
+.card-text {
+    padding-left: 10px;
 }
