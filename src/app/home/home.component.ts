@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public data: GridData[] = [];
-  private completeData: GridData[] = [];
+  public completeData: GridData[] = [];
   p: number = 1;
   public filterItem: string = '';
   public sortingValue: string = '';
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
   search(filterValue) {
     this.data = this.completeData;
-    this.filterItem = filterValue.trim().toLowerCase();
+    this.filterItem = filterValue ? filterValue.trim().toLowerCase() : '';
     console.log(this.filterItem);
     const searchTerms = this.filterItem.split(' ');
     console.log(searchTerms);
