@@ -45,7 +45,7 @@ describe('HomeComponent', () => {
     let expectedData = [{ name: 'Regional A', description: 'someText', image: '', dateLastEdited: '' },
     { name: 'Regional B', description: 'someText', image: '', dateLastEdited: '' }];
     const value = 'regional';
-    component.search(value);
+    component.search('Enter', value);
     expect(component.data).toEqual(expectedData);
   });
 });

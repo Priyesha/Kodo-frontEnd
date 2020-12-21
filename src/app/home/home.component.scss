@@ -32,7 +32,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  // padding: 20px;
 }
 input[type="text"] {
   width: 100%;
@@ -42,21 +41,16 @@ input[type="text"] {
   outline: none;
   padding: 8px;
   box-sizing: border-box;
-  // transition:.3s;
 }
-
 .inputWithIcon {
   position: relative;
-  // width: 400px;
 }
-
 .inputWithIcon i {
   position: absolute;
   right: 0;
   top: 8px;
   padding: 9px 8px;
   color: #aaa;
-  // transition:.3s;
 }
 .sort-by {
   padding-top: 9px;
@@ -65,13 +59,11 @@ select {
   height: 35px;
   border: 2px solid #aaa;
 }
-
 table {
   width: 100%;
   border-collapse: collapse;
   padding: 20px;
 }
-/* Zebra striping */
 tr:nth-of-type(odd) {
   background: #eee;
 }
