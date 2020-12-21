@@ -26,7 +26,6 @@
     padding-left: 20px;
     padding-right: 20px;
   }
-
 }
 .grid-container {
   display: flex;
@@ -90,4 +89,8 @@ th {
 .img {
   width: 30px;
   height: 30px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
 }

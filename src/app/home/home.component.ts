@@ -10,10 +10,10 @@ import { GridData } from '../model/grid-data';
 export class HomeComponent implements OnInit {
 
   public data: GridData[] = [];
+  p: number = 1;
   constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
     this.data = this.homeService.getData();
   }
-
 }
