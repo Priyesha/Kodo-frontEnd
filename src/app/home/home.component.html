@@ -1,7 +1,7 @@
 <div class="main-container">
 <div class="header">	
 <div class="inputWithIcon">
-	<input #searchInput type="text" (keyup)="search($event.target.value)">
+	<input #searchInput type="text" placeholder="Press Enter to Search" (keyup)="search($event.key, $event.target.value)">
 	<i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { HomeService } from './home.service';
 import { GridData } from '../model/grid-data';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild('sortByDropdown') sortByDropdown: ElementRef;
   constructor(private homeService: HomeService, private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.data = this.homeService.getData();
@@ -30,41 +30,48 @@ export class HomeComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.searchInput.nativeElement.value = this.filterItem;
+    if(this.filterItem && this.filterItem.length > 0) {
+      this.searchInput.nativeElement.value = this.filterItem;
+      this.search('Enter', this.filterItem);
+    }
+    if (this.sortingValue && this.sortingValue.length > 0) {
     this.sortByDropdown.nativeElement.value = this.sortingValue;
-    this.search(this.filterItem);
     this.sort(this.sortingValue);
+    }
+    this.cdr.detectChanges();
   }
 
-  search(filterValue) {
-    this.data = this.completeData;
-    this.filterItem = filterValue ? filterValue.trim().toLowerCase() : '';
-    console.log(this.filterItem);
-    const searchTerms = this.filterItem.split(' ');
-    console.log(searchTerms);
-    if (this.filterItem && this.filterItem.length > 0) {
-      this.data = this.data.filter((item) => {
-        return item.name.toLowerCase().includes(this.filterItem) || item.description.toLowerCase().includes(this.filterItem)
-      });
+  search(key, filterValue) {
+    if (key === "Enter") {
+      this.data = this.completeData;
+      this.filterItem = filterValue ? filterValue.trim().toLowerCase() : '';
+      if (this.filterItem && this.filterItem.length > 0) {
+      let keywords = this.filterItem.match(/\w+|"(?:\\"|[^"])+"/g).map(element => element.replace(/"/g,""));
+        for(let key in keywords) {
+          this.data = this.data.filter((item) => {
+             return item.name.toLowerCase().includes(keywords[key]) || item.description.toLowerCase().includes(keywords[key])
+        });
+      }
     } else {
-      this.data = this.data;
+        this.data = this.data;
+      }
+      this.updateRoute();
     }
-    this.updateRoute();
   }
 
-  sort(value) {
-    this.sortingValue = value;
-    if (this.sortingValue) {
-      this.data = this.data.sort((a, b) => a[value].localeCompare(b[value]));
+    sort(value) {
+      this.sortingValue = value;
+      if (this.sortingValue) {
+        this.data = this.data.sort((a, b) => a[value].localeCompare(b[value]));
+      }
+      this.updateRoute();
     }
-    this.updateRoute();
-  }
 
-  updateRoute() {
-    const params = { sortBy: this.sortingValue, searchBy: this.filterItem }
-    this.router.navigate(['.'], {
-      relativeTo: this.route,
-      queryParams: params
-    })
+    updateRoute() {
+      const params = { sortBy: this.sortingValue, searchBy: this.filterItem }
+      this.router.navigate(['.'], {
+        relativeTo: this.route,
+        queryParams: params
+      })
+    }
   }
-}
