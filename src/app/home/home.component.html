@@ -1,12 +1,12 @@
 <div class="main-container">
 <div class="header">	
 <div class="inputWithIcon">
-	<input type="text" (keyup)="search($event)">
+	<input #searchInput type="text" (keyup)="search($event.target.value)">
 	<i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i>
 </div>
 
 <div class="sort-by">
-	<select (change)="sort($event.target.value)">
+	<select #sortByDropdown (change)="sort($event.target.value)">
 		<option value="" disabled selected>Select a value</option>
 		<option value="name">Title</option>
 		<option value="dateLastEdited">Date Last Edited</option>
