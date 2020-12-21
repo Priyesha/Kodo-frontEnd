@@ -1,14 +1,15 @@
 <div class="main-container">
 <div class="header">	
 <div class="inputWithIcon">
-	<input type="text">
+	<input type="text" (keyup)="search($event)">
 	<i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i>
 </div>
 
 <div class="sort-by">
-	<select>
-		<option>Title</option>
-		<option>Date Last Edited</option>
+	<select (change)="sort($event.target.value)">
+		<option value="" disabled selected>Select a value</option>
+		<option value="name">Title</option>
+		<option value="dateLastEdited">Date Last Edited</option>
 	</select>
 </div>
 </div>
